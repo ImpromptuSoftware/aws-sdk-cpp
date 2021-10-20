@@ -29,7 +29,10 @@ static const char CLASS_TAG[] = "WinSyncHttpClient";
 
 WinSyncHttpClient::~WinSyncHttpClient()
 {
-    AWS_LOGSTREAM_DEBUG(GetLogTag(), "Cleaning up client with handle " << m_openHandle);
+    if (m_openHandle)
+    {
+		AWS_LOGSTREAM_DEBUG(GetLogTag(), "Cleaning up client with handle " << m_openHandle);
+    }
     if (GetConnectionPoolManager() && GetOpenHandle())
     {
         GetConnectionPoolManager()->DoCloseHandle(GetOpenHandle());
